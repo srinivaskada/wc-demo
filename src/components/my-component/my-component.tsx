@@ -1,6 +1,6 @@
 import { Component, Prop, h, Host, getAssetPath } from '@stencil/core';
 import { format } from '../../utils/utils';
-import UserIcon from '../../../node_modules/@material-icons/svg/svg/person/round.svg'
+import UserIcon from '@material-icons/svg/svg/person/round.svg'
 // const UserIcon = 'hi'
 @Component({
   tag: 'my-component',
