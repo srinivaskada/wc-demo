@@ -1,9 +1,10 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, h, Host, getAssetPath } from '@stencil/core';
 import { format } from '../../utils/utils';
-
+import UserIcon from '../../../node_modules/@material-icons/svg/svg/person/round.svg'
+// const UserIcon = 'hi'
 @Component({
   tag: 'my-component',
-  styleUrl: 'my-component.css',
+  styleUrl: 'my-component.scss',
   shadow: true,
 })
 export class MyComponent {
@@ -27,6 +28,10 @@ export class MyComponent {
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return <Host>
+      <div>Hello, World! I'm {this.getText()}</div>
+      <div class='svg-container' innerHTML={UserIcon} />
+      <img src={getAssetPath('/assets/media/cat.jpeg')} />
+    </Host>
   }
 }

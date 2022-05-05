@@ -1,4 +1,7 @@
 import { Config } from '@stencil/core';
+import { sass } from '@stencil/sass'
+import { inlineSvg } from 'stencil-inline-svg';
+
 
 export const config: Config = {
   namespace: 'wc-demo',
@@ -18,4 +21,8 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
   ],
+  plugins: [
+    sass(),
+    inlineSvg()
+  ]
 };
