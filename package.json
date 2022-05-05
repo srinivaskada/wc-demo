@@ -15,7 +15,9 @@
     "url": "https://github.com/ionic-team/stencil-component-starter.git"
   },
   "files": [
-    "src/"
+    "src/",
+    "stencil.config.json",
+    "tsconfig.json"
   ],
   "scripts": {
     "build": "stencil build --docs",
