@@ -1,5 +1,5 @@
-import { Component, Prop, h, Host, getAssetPath } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Prop, h, Host } from '@stencil/core';
+import { format, getMediaPath } from '../../utils/utils';
 import UserIcon from '@material-icons/svg/svg/person/round.svg';
 // const UserIcon = 'hi'
 export class MyComponent {
@@ -12,7 +12,7 @@ export class MyComponent {
         "Hello, World! I'm ",
         this.getText()),
       h("div", { class: 'svg-container', innerHTML: UserIcon }),
-      h("img", { src: getAssetPath('/assets/media/cat.jpeg') }));
+      h("img", { src: getMediaPath('cat.jpeg') }));
   }
   static get is() { return "my-component"; }
   static get encapsulation() { return "shadow"; }

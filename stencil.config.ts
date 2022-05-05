@@ -12,13 +12,27 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements',
+      copy: [
+        {
+          src: 'surf-wc-assets',
+          dest: 'dist/surf-wc-assets',
+          warn: true,
+        }
+      ]
     },
     {
       type: 'docs-readme',
     },
     {
       type: 'www',
-      serviceWorker: null, // disable service workers
+      serviceWorker: null, // disable service workers,
+      copy: [
+        {
+          src: 'surf-wc-assets',
+          dest: 'surf-wc-assets',
+          warn: true,
+        }
+      ]
     },
   ],
   plugins: [

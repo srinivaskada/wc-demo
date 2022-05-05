@@ -1,5 +1,5 @@
-import { Component, Prop, h, Host, getAssetPath } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, Prop, h, Host } from '@stencil/core';
+import { format, getMediaPath } from '../../utils/utils';
 import UserIcon from '@material-icons/svg/svg/person/round.svg'
 // const UserIcon = 'hi'
 @Component({
@@ -31,7 +31,7 @@ export class MyComponent {
     return <Host>
       <div>Hello, World! I'm {this.getText()}</div>
       <div class='svg-container' innerHTML={UserIcon} />
-      <img src={getAssetPath('/assets/media/cat.jpeg')} />
+      <img src={getMediaPath('cat.jpeg')} />
     </Host>
   }
 }
