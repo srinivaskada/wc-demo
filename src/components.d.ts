@@ -20,6 +20,11 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface SurfLiveVideo {
+        "authToken": string;
+        "cameraId": number;
+        "imei": string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +33,15 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLSurfLiveVideoElement extends Components.SurfLiveVideo, HTMLStencilElement {
+    }
+    var HTMLSurfLiveVideoElement: {
+        prototype: HTMLSurfLiveVideoElement;
+        new (): HTMLSurfLiveVideoElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "surf-live-video": HTMLSurfLiveVideoElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +59,14 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface SurfLiveVideo {
+        "authToken"?: string;
+        "cameraId"?: number;
+        "imei"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "surf-live-video": SurfLiveVideo;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +74,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "surf-live-video": LocalJSX.SurfLiveVideo & JSXBase.HTMLAttributes<HTMLSurfLiveVideoElement>;
         }
     }
 }

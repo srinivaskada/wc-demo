@@ -28,7 +28,12 @@
   "dependencies": {
     "@material-icons/svg": "^1.0.27",
     "@stencil/core": "^2.13.0",
-    "stencil-inline-svg": "^1.1.0"
+    "adapterjs": "^0.15.5",
+    "axios": "^0.27.2",
+    "bulma": "^0.9.4",
+    "hls.js": "^1.1.5",
+    "stencil-inline-svg": "^1.1.0",
+    "webrtc-adapter": "^8.1.1"
   },
   "devDependencies": {
     "@stencil/sass": "^1.5.2",
