@@ -54,7 +54,7 @@ export class SurfLiveVideo {
   @Watch('authToken')
   updateToken(newValue: string, _oldValue: string) {
     const isBlank = typeof newValue !== 'string' || newValue === '';
-    if (isBlank) { 
+    if (isBlank) {
         throw new Error('thingToDo is a required property and cannot be empty') 
     }
     this.surfApiHelper = new SurfApiHelper(this.authToken)
