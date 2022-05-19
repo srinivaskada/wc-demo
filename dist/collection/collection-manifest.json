@@ -1,0 +1,13 @@
+{
+  "entries": [
+    "./components/my-component/my-component.js",
+    "./components/surf-live-video/surf-live-video.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "2.15.1",
+    "typescriptVersion": "4.5.4"
+  },
+  "collections": [],
+  "bundles": []
+}

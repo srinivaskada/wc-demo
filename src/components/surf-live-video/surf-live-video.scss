@@ -3,12 +3,17 @@
 @import "../../../node_modules/bulma/sass/components/dropdown.sass";
 :host {
   display: block;
+  border: 1px solid gray;
+  margin: 5px;
 }
 .live-video-container {
   .live-video-controls-container {
     position: absolute;
     width: 100%;
+    background-color: #80808070;
     bottom: 0;
+    color: white;
+    fill: white;
   }
 }
 

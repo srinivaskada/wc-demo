@@ -1,3 +1,4 @@
+import { EventEmitter } from '../../stencil-public-runtime';
 import SurfApiHelper from '../../utils/SurfApiHelper';
 import 'adapterjs';
 declare enum PlayerType {
@@ -9,6 +10,9 @@ interface PlayerState {
   playStatus?: boolean;
 }
 export declare class SurfLiveVideo {
+  authToken: string;
+  imei: string;
+  cameraId: number;
   hostElement: HTMLElement;
   videoElement: HTMLVideoElement;
   player: any;
@@ -18,10 +22,9 @@ export declare class SurfLiveVideo {
   playerType: PlayerType;
   playerState: PlayerState;
   showPlayerTypeDropdown: boolean;
-  authToken: string;
-  imei: string;
-  cameraId: number;
   constructor();
+  closePlayer: EventEmitter;
+  closePlayerHandler(): void;
   get videoElementId(): string;
   setPlayerState(newState: PlayerState): void;
   connectedCallback(): void;

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import * as webrtcPlayer from '../../utils/single-webrtc'
 import * as hlsPlayer from '../../utils/single-hls'
 import SurfApiHelper from '../../utils/SurfApiHelper';
@@ -6,8 +6,9 @@ import Fullscreen from '@material-icons/svg/svg/fullscreen/round.svg'
 import FullscreenExit from '@material-icons/svg/svg/fullscreen_exit/round.svg'
 import PlayArrow from '@material-icons/svg/svg/play_arrow/round.svg'
 import Pause from '@material-icons/svg/svg/pause/round.svg'
+import Close from '@material-icons/svg/svg/close/round.svg'
 import 'adapterjs'
-import { exitFullScreen, getMediaPath, goFullScreen, isFullscreen, sleep } from '../../utils/utils';
+import { exitFullScreen, goFullScreen, isFullscreen, sleep } from '../../utils/utils';
 
 
 enum PlayerType {
@@ -28,6 +29,10 @@ interface PlayerState {
   shadow: true,
 })
 export class SurfLiveVideo {
+  @Prop() authToken: string;
+  @Prop() imei: string;
+  @Prop() cameraId: number;
+
   hostElement: HTMLElement
   videoElement!: HTMLVideoElement
   player!: any
@@ -43,13 +48,22 @@ export class SurfLiveVideo {
   }
   @State() showPlayerTypeDropdown: boolean = false
 
-  @Prop() authToken: string;
-  @Prop() imei: string;
-  @Prop() cameraId: number;
-
   constructor() {
     this.surfApiHelper = new SurfApiHelper(this.authToken)
   }
+
+  @Event({
+    eventName: 'close',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) closePlayer: EventEmitter;
+  
+  closePlayerHandler() {
+    alert('closePlayerHandler')
+    this.closePlayer.emit();
+  }
+
   get videoElementId () {
     return `${this.imei}-${this.cameraId}`
   }
@@ -194,8 +208,8 @@ export class SurfLiveVideo {
               autoplay
             ></video> : null}
             {/*<img class="column is-full p-0" src={getMediaPath('cat.jpeg')} />*/}
-            <div class="live-video-controls-container">
-              <span class='icon is-clickable' onClick={() => this.toggleFullscreen()} innerHTML={this.playerState.fullscreen ? FullscreenExit : Fullscreen} />
+            <div class="live-video-controls-container is-flex is-flex-direction-row">
+              <span class="is-flex-grow-1">{`${this.imei} - ${this.cameraId}`}</span>
               <span class='icon is-clickable' onClick={() => this.togglePlayer()} innerHTML={this.playerState.playStatus ? Pause : PlayArrow} />
               <div class={`dropdown is-up ${this.showPlayerTypeDropdown ? 'is-active' : ''}`}>
                 <div class="dropdown-trigger">
@@ -218,6 +232,8 @@ export class SurfLiveVideo {
                   </div>
                 </div>
               </div>
+              <span class='icon is-clickable' onClick={() => this.toggleFullscreen()} innerHTML={this.playerState.fullscreen ? FullscreenExit : Fullscreen} />
+              <span class='icon is-clickable' onClick={() => this.closePlayerHandler()} innerHTML={Close} />
             </div>
           </div>
         </div>

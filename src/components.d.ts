@@ -63,6 +63,7 @@ declare namespace LocalJSX {
         "authToken"?: string;
         "cameraId"?: number;
         "imei"?: string;
+        "onClose"?: (event: CustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

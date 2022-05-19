@@ -14,6 +14,13 @@
 | `imei`      | `imei`       |             | `string` | `undefined` |
 
 
+## Events
+
+| Event   | Description | Type               |
+| ------- | ----------- | ------------------ |
+| `close` |             | `CustomEvent<any>` |
+
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
