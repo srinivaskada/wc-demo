@@ -23,6 +23,7 @@ export declare class SurfLiveVideo {
   playerState: PlayerState;
   showPlayerTypeDropdown: boolean;
   constructor();
+  updateToken(newValue: string, _oldValue: string): void;
   closePlayer: EventEmitter;
   closePlayerHandler(): void;
   get videoElementId(): string;

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter, Watch } from '@stencil/core';
 import * as webrtcPlayer from '../../utils/single-webrtc'
 import * as hlsPlayer from '../../utils/single-hls'
 import SurfApiHelper from '../../utils/SurfApiHelper';
@@ -49,6 +49,14 @@ export class SurfLiveVideo {
   @State() showPlayerTypeDropdown: boolean = false
 
   constructor() {
+  }
+
+  @Watch('authToken')
+  updateToken(newValue: string, _oldValue: string) {
+    const isBlank = typeof newValue !== 'string' || newValue === '';
+    if (isBlank) { 
+        throw new Error('thingToDo is a required property and cannot be empty') 
+    }
     this.surfApiHelper = new SurfApiHelper(this.authToken)
   }
 

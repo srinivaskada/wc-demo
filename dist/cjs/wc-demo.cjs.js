@@ -1,6 +1,6 @@
 'use strict';
 
-const index = require('./index-672ae4c8.js');
+const index = require('./index-6024296b.js');
 
 /*
  Stencil Client Patch Browser v2.15.1 | MIT Licensed | https://stenciljs.com

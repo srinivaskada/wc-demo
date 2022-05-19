@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, Watch } from '@stencil/core';
 import * as webrtcPlayer from '../../utils/single-webrtc';
 import * as hlsPlayer from '../../utils/single-hls';
 import SurfApiHelper from '../../utils/SurfApiHelper';
@@ -25,6 +25,12 @@ export class SurfLiveVideo {
       playStatus: false
     };
     this.showPlayerTypeDropdown = false;
+  }
+  updateToken(newValue, _oldValue) {
+    const isBlank = typeof newValue !== 'string' || newValue === '';
+    if (isBlank) {
+      throw new Error('thingToDo is a required property and cannot be empty');
+    }
     this.surfApiHelper = new SurfApiHelper(this.authToken);
   }
   closePlayerHandler() {
@@ -248,5 +254,9 @@ export class SurfLiveVideo {
         "resolved": "any",
         "references": {}
       }
+    }]; }
+  static get watchers() { return [{
+      "propName": "authToken",
+      "methodName": "updateToken"
     }]; }
 }

@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-672ae4c8.js');
+const index = require('./index-6024296b.js');
 const utils$1 = require('./utils-1146d037.js');
 
 function createWebrtcVideo(streamDetails) {
@@ -30304,6 +30304,12 @@ const SurfLiveVideo = class {
       playStatus: false
     };
     this.showPlayerTypeDropdown = false;
+  }
+  updateToken(newValue, _oldValue) {
+    const isBlank = typeof newValue !== 'string' || newValue === '';
+    if (isBlank) {
+      throw new Error('thingToDo is a required property and cannot be empty');
+    }
     this.surfApiHelper = new SurfApiHelper(this.authToken);
   }
   closePlayerHandler() {
@@ -30429,6 +30435,9 @@ const SurfLiveVideo = class {
         this.videoElement = el;
       }, style: { width: '100%' }, muted: true, id: `remoteVideo-${this.videoElementId}`, playsinline: "true", autoplay: true }) : null, index.h("div", { class: "live-video-controls-container is-flex is-flex-direction-row" }, index.h("span", { class: "is-flex-grow-1" }, `${this.imei} - ${this.cameraId}`), index.h("span", { class: 'icon is-clickable', onClick: () => this.togglePlayer(), innerHTML: this.playerState.playStatus ? Pause : PlayArrow }), index.h("div", { class: `dropdown is-up ${this.showPlayerTypeDropdown ? 'is-active' : ''}` }, index.h("div", { class: "dropdown-trigger" }, index.h("button", { class: "button", "aria-haspopup": "true", "aria-controls": "dropdown-menu", onClick: () => this.togglePlayerTypeDropdown() }, index.h("span", null, this.playerType), index.h("span", { class: "icon is-small" }, index.h("i", { class: "fas fa-angle-down", "aria-hidden": "true" })))), index.h("div", { class: "dropdown-menu", id: "dropdown-menu", role: "menu" }, index.h("div", { class: "dropdown-content" }, [PlayerType.Webrtc, PlayerType.Hls].map(playerType => (index.h("span", { class: `dropdown-item ${this.playerType === playerType ? 'is-active' : ''}`, onClick: () => this.changePlayerType(playerType) }, playerType)))))), index.h("span", { class: 'icon is-clickable', onClick: () => this.toggleFullscreen(), innerHTML: this.playerState.fullscreen ? FullscreenExit : Fullscreen }), index.h("span", { class: 'icon is-clickable', onClick: () => this.closePlayerHandler(), innerHTML: Close }))))));
   }
+  static get watchers() { return {
+    "authToken": ["updateToken"]
+  }; }
 };
 SurfLiveVideo.style = surfLiveVideoCss;
 
