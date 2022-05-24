@@ -20,7 +20,10 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
+    "build:dev2": "ENVIRONMENT=dev2 stencil build --docs",
+    "build:stage2": "ENVIRONMENT=stage2 stencil build --docs",
     "start": "stencil build --dev --watch --serve",
+    "start:stage2": "ENVIRONMENT=stage2 LOCAL=true stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"

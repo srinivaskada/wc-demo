@@ -1,5 +1,78 @@
-import { r as registerInstance, c as createEvent, h, H as Host } from './index-06b70aad.js';
-import { g as goFullScreen, i as isFullscreen, e as exitFullScreen, s as sleep } from './utils-bf52ed63.js';
+import { E as Env, r as registerInstance, h, H as Host, c as createEvent } from './index-4b029779.js';
+
+function format(first, middle, last) {
+  return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
+}
+const getMediaPath = (name) => {
+  if (Env.LOCAL) {
+    return `/surf-wc-assets/media/${name}`;
+  }
+  if (Env.ASSET_BASE_URL)
+    return Env.ASSET_BASE_URL;
+  return `${Env.ASSET_BASE_URL}/media/${name}`;
+};
+const goFullScreen = (elem) => {
+  try {
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    }
+    else if (elem.mozRequestFullScreen) {
+      elem.mozRequestFullScreen();
+    }
+    else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    }
+    else if (elem.webkitEnterFullScreen != undefined) {
+      elem.webkitEnterFullScreen(); // Safari
+    }
+  }
+  catch (ex) {
+    throw ex;
+  }
+};
+const exitFullScreen = () => {
+  for (const exitFullScreenProp of [
+    'exitFullscreen',
+    'mozCancelFullScreen',
+    'webkitExitFullscreen',
+    'msExitFullscreen'
+  ]) {
+    if (document[exitFullScreenProp]) {
+      document[exitFullScreenProp]();
+      break;
+    }
+  }
+};
+const isFullscreen = () => {
+  const doc = document;
+  const currentFullScreenState = doc.fullScreen ||
+    doc.mozFullScreen ||
+    doc.webkitIsFullScreen ||
+    doc.webkitFullscreenElement;
+  return !!currentFullScreenState;
+};
+const sleep = (ms) => {
+  return new Promise(r => {
+    setTimeout(r, ms);
+  });
+};
+
+const UserIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4s-4 1.79-4 4s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"/></svg>`;
+
+const myComponentCss = ".host{display:block}";
+
+const MyComponent = class {
+  constructor(hostRef) {
+    registerInstance(this, hostRef);
+  }
+  getText() {
+    return format(this.first, this.middle, this.last);
+  }
+  render() {
+    return h(Host, null, h("div", null, "Hello, World! I'm ", this.getText()), h("div", { class: 'svg-container', innerHTML: UserIcon }), h("img", { src: getMediaPath('cat.jpeg') }));
+  }
+};
+MyComponent.style = myComponentCss;
 
 function createWebrtcVideo(streamDetails) {
   let sdp;
@@ -30242,7 +30315,8 @@ axios_1.default = _default;
 
 var axios = axios_1;
 
-const V2_BASEURL = 'https://api.stage2.surfsight.net/v2';
+console.log(Env);
+const V2_BASEURL = Env.V2_BASEURL;
 class SurfApiHelper {
   constructor(authToken) {
     this.authToken = authToken;
@@ -30300,6 +30374,7 @@ const SurfLiveVideo = class {
       playStatus: false
     };
     this.showPlayerTypeDropdown = false;
+    this.surfApiHelper = new SurfApiHelper(this.authToken);
   }
   updateToken(newValue, _oldValue) {
     const isBlank = typeof newValue !== 'string' || newValue === '';
@@ -30429,7 +30504,7 @@ const SurfLiveVideo = class {
     return (h(Host, null, h("div", { class: "columns m-0", ref: el => this.hostElement = el }, h("div", { class: "live-video-container columns p-0 mx-0 my-auto is-flex-wrap-wrap column is-full is-relative" }, this.renderVideoElement ? h("video", { ref: el => {
         console.log('el', el);
         this.videoElement = el;
-      }, style: { width: '100%' }, muted: true, id: `remoteVideo-${this.videoElementId}`, playsinline: "true", autoplay: true }) : null, h("div", { class: "live-video-controls-container is-flex is-flex-direction-row" }, h("span", { class: "is-flex-grow-1" }, `${this.imei} - ${this.cameraId}`), h("span", { class: 'icon is-clickable', onClick: () => this.togglePlayer(), innerHTML: this.playerState.playStatus ? Pause : PlayArrow }), h("div", { class: `dropdown is-up ${this.showPlayerTypeDropdown ? 'is-active' : ''}` }, h("div", { class: "dropdown-trigger" }, h("button", { class: "button", "aria-haspopup": "true", "aria-controls": "dropdown-menu", onClick: () => this.togglePlayerTypeDropdown() }, h("span", null, this.playerType), h("span", { class: "icon is-small" }, h("i", { class: "fas fa-angle-down", "aria-hidden": "true" })))), h("div", { class: "dropdown-menu", id: "dropdown-menu", role: "menu" }, h("div", { class: "dropdown-content" }, [PlayerType.Webrtc, PlayerType.Hls].map(playerType => (h("span", { class: `dropdown-item ${this.playerType === playerType ? 'is-active' : ''}`, onClick: () => this.changePlayerType(playerType) }, playerType)))))), h("span", { class: 'icon is-clickable', onClick: () => this.toggleFullscreen(), innerHTML: this.playerState.fullscreen ? FullscreenExit : Fullscreen }), h("span", { class: 'icon is-clickable', onClick: () => this.closePlayerHandler(), innerHTML: Close }))))));
+      }, style: { width: '100%' }, muted: true, id: `remoteVideo-${this.videoElementId}`, playsinline: "true", autoplay: true }) : null, h("div", { class: "live-video-controls-container is-flex is-flex-direction-row" }, h("span", { class: "is-flex-grow-1" }, `${this.imei} - ${this.cameraId}`), h("slot", { name: 'button' }), h("span", { class: 'icon is-clickable', onClick: () => this.togglePlayer(), innerHTML: this.playerState.playStatus ? Pause : PlayArrow }), h("div", { class: `dropdown is-up ${this.showPlayerTypeDropdown ? 'is-active' : ''}` }, h("div", { class: "dropdown-trigger" }, h("button", { class: "button", "aria-haspopup": "true", "aria-controls": "dropdown-menu", onClick: () => this.togglePlayerTypeDropdown() }, h("span", null, this.playerType), h("span", { class: "icon is-small" }, h("i", { class: "fas fa-angle-down", "aria-hidden": "true" })))), h("div", { class: "dropdown-menu", id: "dropdown-menu", role: "menu" }, h("div", { class: "dropdown-content" }, [PlayerType.Webrtc, PlayerType.Hls].map(playerType => (h("span", { class: `dropdown-item ${this.playerType === playerType ? 'is-active' : ''}`, onClick: () => this.changePlayerType(playerType) }, playerType)))))), h("span", { class: 'icon is-clickable', onClick: () => this.toggleFullscreen(), innerHTML: this.playerState.fullscreen ? FullscreenExit : Fullscreen }), h("span", { class: 'icon is-clickable', onClick: () => this.closePlayerHandler(), innerHTML: Close }))))));
   }
   static get watchers() { return {
     "authToken": ["updateToken"]
@@ -30437,4 +30512,4 @@ const SurfLiveVideo = class {
 };
 SurfLiveVideo.style = surfLiveVideoCss;
 
-export { SurfLiveVideo as surf_live_video };
+export { MyComponent as my_component, SurfLiveVideo as surf_live_video };

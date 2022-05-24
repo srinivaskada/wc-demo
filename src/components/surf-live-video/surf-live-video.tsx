@@ -49,6 +49,7 @@ export class SurfLiveVideo {
   @State() showPlayerTypeDropdown: boolean = false
 
   constructor() {
+    this.surfApiHelper = new SurfApiHelper(this.authToken)
   }
 
   @Watch('authToken')
@@ -218,6 +219,7 @@ export class SurfLiveVideo {
             {/*<img class="column is-full p-0" src={getMediaPath('cat.jpeg')} />*/}
             <div class="live-video-controls-container is-flex is-flex-direction-row">
               <span class="is-flex-grow-1">{`${this.imei} - ${this.cameraId}`}</span>
+              <slot name='button'></slot>
               <span class='icon is-clickable' onClick={() => this.togglePlayer()} innerHTML={this.playerState.playStatus ? Pause : PlayArrow} />
               <div class={`dropdown is-up ${this.showPlayerTypeDropdown ? 'is-active' : ''}`}>
                 <div class="dropdown-trigger">

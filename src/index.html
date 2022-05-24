@@ -15,10 +15,17 @@
           alert(`${$(this).attr('id')}`)
           $(this).remove()
         })
+        const video1 = document.getElementById('video-1')
+        const h1 = video1.getElementsByTagName('h1')[0]
+        setInterval(() => {
+          console.log(h1)
+          h1.innerHTML = `${Math.random()}`
+        }, 1000)
       })
     </script>
   </head>
   <body>
+    <my-component></my-component>
     <div style="width: 400px; display: inline-block;">
       <surf-live-video
         id="video-1"
@@ -26,7 +33,11 @@
         auth-token="g2LrB7SGE1cfyLe8DdxwP7AtHrF9rJWktplL6JpPSDc"
         imei="357660101178291"
         camera-id="1"
-      ></surf-live-video>
+      >
+        <!--div slot="button">
+          <h1 onclick="alert('Hi')">And me</h1>
+        </div-->
+      </surf-live-video>
       <surf-live-video
         id="video-2"
         style="width: 100%;"

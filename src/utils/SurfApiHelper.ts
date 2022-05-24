@@ -1,5 +1,7 @@
 import axios, { Axios } from "axios";
-const V2_BASEURL = 'https://api.stage2.surfsight.net/v2'
+import { Env } from '@stencil/core'
+console.log(Env)
+const V2_BASEURL = Env.V2_BASEURL
 class SurfApiHelper {
   axios: Axios
   constructor(private authToken: string) {

@@ -1,7 +1,16 @@
+import { Env } from '@stencil/core';
+
 export function format(first: string, middle: string, last: string): string {
   return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
 }
-export const getMediaPath = (name: string) => `/surf-wc-assets/media/${name}`
+
+export const getMediaPath = (name: string) => {
+  if (Env.LOCAL) {
+    return `/surf-wc-assets/media/${name}`
+  }
+  if (Env.ASSET_BASE_URL) return Env.ASSET_BASE_URL
+  return `${Env.ASSET_BASE_URL}/media/${name}`
+}
 
 export const goFullScreen = (elem: any) => {
   try {

@@ -25,6 +25,7 @@ export class SurfLiveVideo {
       playStatus: false
     };
     this.showPlayerTypeDropdown = false;
+    this.surfApiHelper = new SurfApiHelper(this.authToken);
   }
   updateToken(newValue, _oldValue) {
     const isBlank = typeof newValue !== 'string' || newValue === '';
@@ -160,6 +161,7 @@ export class SurfLiveVideo {
             }, style: { width: '100%' }, muted: true, id: `remoteVideo-${this.videoElementId}`, playsinline: "true", autoplay: true }) : null,
           h("div", { class: "live-video-controls-container is-flex is-flex-direction-row" },
             h("span", { class: "is-flex-grow-1" }, `${this.imei} - ${this.cameraId}`),
+            h("slot", { name: 'button' }),
             h("span", { class: 'icon is-clickable', onClick: () => this.togglePlayer(), innerHTML: this.playerState.playStatus ? Pause : PlayArrow }),
             h("div", { class: `dropdown is-up ${this.showPlayerTypeDropdown ? 'is-active' : ''}` },
               h("div", { class: "dropdown-trigger" },
