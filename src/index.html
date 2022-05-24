@@ -8,21 +8,6 @@
     </script>
     <script type="module" src="/build/wc-demo.esm.js"></script>
     <script nomodule src="/build/wc-demo.js"></script>
-    <script>
-      $(document).ready(function () {
-        $('surf-live-video').on('close', function () {
-          console.log($(this))
-          alert(`${$(this).attr('id')}`)
-          $(this).remove()
-        })
-        const video1 = document.getElementById('video-1')
-        const h1 = video1.getElementsByTagName('h1')[0]
-        setInterval(() => {
-          console.log(h1)
-          h1.innerHTML = `${Math.random()}`
-        }, 1000)
-      })
-    </script>
   </head>
   <body>
     <my-component></my-component>
@@ -33,6 +18,7 @@
         auth-token="g2LrB7SGE1cfyLe8DdxwP7AtHrF9rJWktplL6JpPSDc"
         imei="357660101178291"
         camera-id="1"
+        env="stage2"
       >
         <!--div slot="button">
           <h1 onclick="alert('Hi')">And me</h1>

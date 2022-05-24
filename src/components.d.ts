@@ -23,6 +23,7 @@ export namespace Components {
     interface SurfLiveVideo {
         "authToken": string;
         "cameraId": number;
+        "environmentName": string;
         "imei": string;
     }
 }
@@ -62,6 +63,7 @@ declare namespace LocalJSX {
     interface SurfLiveVideo {
         "authToken"?: string;
         "cameraId"?: number;
+        "environmentName"?: string;
         "imei"?: string;
         "onClose"?: (event: CustomEvent<any>) => void;
     }

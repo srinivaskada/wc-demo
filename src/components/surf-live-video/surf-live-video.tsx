@@ -29,6 +29,9 @@ interface PlayerState {
   shadow: true,
 })
 export class SurfLiveVideo {
+  @Prop({
+    attribute: 'env'
+  }) environmentName: string = 'prod2'
   @Prop() authToken: string;
   @Prop() imei: string;
   @Prop() cameraId: number;
@@ -49,7 +52,7 @@ export class SurfLiveVideo {
   @State() showPlayerTypeDropdown: boolean = false
 
   constructor() {
-    this.surfApiHelper = new SurfApiHelper(this.authToken)
+    this.surfApiHelper = new SurfApiHelper(this.authToken, this.environmentName)
   }
 
   @Watch('authToken')

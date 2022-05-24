@@ -19,6 +19,7 @@
     "loader/"
   ],
   "scripts": {
+    "postinstall": "node scripts/build.js",
     "build": "stencil build --docs",
     "build:dev2": "ENVIRONMENT=dev2 stencil build --docs",
     "build:stage2": "ENVIRONMENT=stage2 stencil build --docs",

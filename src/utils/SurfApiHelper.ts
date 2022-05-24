@@ -1,12 +1,12 @@
 import axios, { Axios } from "axios";
-import { Env } from '@stencil/core'
-console.log(Env)
-const V2_BASEURL = Env.V2_BASEURL
+import environments from "../environments";
 class SurfApiHelper {
   axios: Axios
-  constructor(private authToken: string) {
+  apiEnvironment: any
+  constructor(private authToken: string, apiEnvironmentName: string = null) {
+    this.apiEnvironment = environments[apiEnvironmentName] || environments['prod2']
     this.axios = axios.create({
-      baseURL: V2_BASEURL,
+      baseURL: this.apiEnvironment.V2_BASEURL,
       headers: {
         Authorization: `Bearer ${this.authToken}`
       }
