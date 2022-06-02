@@ -4,5 +4,6 @@ export const V2_BASEURL = `${API_DOMAIN}/v2`
 
 export default {
   V2_BASEURL,
-  API_DOMAIN
+  API_DOMAIN,
+  SURFSIGHT_UI_COMPONENTS_DOMAIN
 }

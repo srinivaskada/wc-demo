@@ -7,7 +7,7 @@ export const config: Config = {
   env: {
     VERSION: process.env.npm_package_version,
     LOCAL: process.env.LOCAL,
-    API_ENVIRONMENT: process.env.ENVIRONMENT,
+    SURF_API_ENVIRONMENT: process.env.SURF_API_ENVIRONMENT,
     ASSET_BASE_URL: process.env.ASSET_BASE_URL,
   },
   outputTargets: [

@@ -1,5 +1,9 @@
 import { Env } from '@stencil/core';
 
+import environments from "../environments";
+
+const environment = environments[Env.SURF_API_ENVIRONMENT] || environments['prod2']
+
 export function format(first: string, middle: string, last: string): string {
   return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
 }
@@ -8,8 +12,8 @@ export const getMediaPath = (name: string) => {
   if (Env.LOCAL) {
     return `/surf-wc-assets/media/${name}`
   }
-  if (Env.ASSET_BASE_URL) return Env.ASSET_BASE_URL
-  return `${Env.ASSET_BASE_URL}/media/${name}`
+  if (Env.ASSET_BASE_URL) return `${Env.ASSET_BASE_URL}/media/${name}`
+  return `${environment.SURFSIGHT_UI_COMPONENTS_DOMAIN}/${Env.VERSION}/surf-wc-assets/media/${name}`
 }
 
 export const goFullScreen = (elem: any) => {

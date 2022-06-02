@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Event, EventEmitter, Watch } from '@stencil/core';
+import { Component, Host, h, Prop, State, Event, EventEmitter, Watch, Env } from '@stencil/core';
 import * as webrtcPlayer from '../../utils/single-webrtc'
 import * as hlsPlayer from '../../utils/single-hls'
 import SurfApiHelper from '../../utils/SurfApiHelper';
@@ -31,7 +31,7 @@ interface PlayerState {
 export class SurfLiveVideo {
   @Prop({
     attribute: 'env'
-  }) environmentName: string = 'prod2'
+  }) environmentName: string = Env.SURF_API_ENVIRONMENT || 'prod2'
   @Prop() authToken: string;
   @Prop() imei: string;
   @Prop() cameraId: number;

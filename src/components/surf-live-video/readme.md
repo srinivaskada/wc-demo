@@ -7,11 +7,12 @@
 
 ## Properties
 
-| Property    | Attribute    | Description | Type     | Default     |
-| ----------- | ------------ | ----------- | -------- | ----------- |
-| `authToken` | `auth-token` |             | `string` | `undefined` |
-| `cameraId`  | `camera-id`  |             | `number` | `undefined` |
-| `imei`      | `imei`       |             | `string` | `undefined` |
+| Property          | Attribute    | Description | Type     | Default                                 |
+| ----------------- | ------------ | ----------- | -------- | --------------------------------------- |
+| `authToken`       | `auth-token` |             | `string` | `undefined`                             |
+| `cameraId`        | `camera-id`  |             | `number` | `undefined`                             |
+| `environmentName` | `env`        |             | `string` | `Env.SURF_API_ENVIRONMENT \|\| 'prod2'` |
+| `imei`            | `imei`       |             | `string` | `undefined`                             |
 
 
 ## Events
